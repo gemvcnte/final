@@ -78,7 +78,7 @@ router.post(
   }),
 );
 
-// For Creating a faculty
+// for creating a faculty user
 router.post(
   "/dean/faculty/create-faculty",
   expressAsyncHandler(async (req, res) => {
@@ -106,6 +106,50 @@ router.post(
       await faculty.save();
 
       return res.status(201).json({ message: "Faculty has been created." });
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .json({ message: "Internal server error. Please try again later." });
+    }
+  }),
+);
+
+//for getting all users with their role
+router.get(
+  "/dean/faculty/get-all-users",
+  expressAsyncHandler(async (req, res) => {
+    try {
+      const users = await User.find();
+
+      if (!users) {
+        return res.status(404).json({ message: "There is no users" });
+      }
+
+      return res.status(200).json({ message: "Fetched users", data: users });
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .json({ message: "Internal server error. Please try again later." });
+    }
+  }),
+);
+
+// for getting all announcements
+router.get(
+  "/dean/announcement/get-all-announcements",
+  expressAsyncHandler(async (req, res) => {
+    try {
+      const announcements = await Announcement.find();
+
+      if (!announcements) {
+        return res.status(404).json({ message: "No announcements." });
+      }
+
+      return res
+        .status(200)
+        .json({ message: "Fetched announcements: ", data: announcements });
     } catch (error) {
       console.error(error);
       res
