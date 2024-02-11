@@ -18,6 +18,11 @@ const announcementSchema = new mongoose.Schema({
     required: true,
     // enum: ['']
   },
+  status: {
+    type: String,
+    required: true,
+    enum: ["accepted", "pending", "declined"],
+  },
 });
 
 const Announcement = mongoose.model("announcement", announcementSchema);
