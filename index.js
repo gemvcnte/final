@@ -1,9 +1,9 @@
-const deanController = require("./controller/deanController");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
 const dotenv = require("dotenv");
+const deanController = require("./controller/deanController");
 dotenv.config();
 
 const app = express();
